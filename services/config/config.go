@@ -14,6 +14,7 @@ type Config struct {
 	AppPort  string `envconfig:"APP_PORT"`
 	AppHost  string `envconfig:"APP_HOST"`
 
+	DBUrl          string `envconfig:"DB_URL"`
 	DBHost         string `envconfig:"DB_HOST"`
 	DBPort         string `envconfig:"DB_PORT"`
 	DBUser         string `envconfig:"DB_USER"`
