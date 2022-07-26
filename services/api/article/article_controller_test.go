@@ -6,8 +6,11 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/bagastri07/be-test-kumparan/mocks"
+	"github.com/bagastri07/be-test-kumparan/models"
+	"github.com/bagastri07/be-test-kumparan/models/base_models"
 	"github.com/bagastri07/be-test-kumparan/validator"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
@@ -90,6 +93,91 @@ func Test_articleController_HandleCreateArticle(t *testing.T) {
 				he, ok := err.(*echo.HTTPError)
 				if ok {
 					assert.Equal(t, tt.wantStatus, he.Code)
+				} else {
+					assert.Equal(t, tt.wantErr, err != nil)
+				}
+			} else {
+				assert.Equal(t, tt.wantStatus, rec.Code)
+			}
+		})
+	}
+}
+
+func Test_articleController_HandleGetArticlesPagination(t *testing.T) {
+	type mockGetArticlesPagination struct {
+		data *base_models.PaginationResponse
+		err  error
+	}
+
+	tests := []struct {
+		name                      string
+		mockGetArticlesPagination mockGetArticlesPagination
+		wantErr                   bool
+		wantStatus                int
+	}{
+		{
+			name: "when success, then return http.StatusOk",
+			mockGetArticlesPagination: mockGetArticlesPagination{
+				data: &base_models.PaginationResponse{
+					Limit:      5,
+					Page:       1,
+					TotalItems: 1,
+					TotalPages: 1,
+					Items: []models.GetArticleResponse{
+						{
+							ID:         "234",
+							AuthorName: "Jojo",
+							Title:      "Judul Kumparan",
+							Body:       "Body Kumparan",
+							BaseTimeStampResponse: base_models.BaseTimeStampResponse{
+								CreatedAt: &time.Time{},
+								UpdatedAt: &time.Time{},
+							},
+						},
+					},
+				},
+				err: nil,
+			},
+			wantErr:    false,
+			wantStatus: http.StatusOK,
+		},
+		{
+			name: "when get pagination err, then return http.InternalServerErr",
+			mockGetArticlesPagination: mockGetArticlesPagination{
+				data: nil,
+				err:  errors.New("err"),
+			},
+			wantErr:    true,
+			wantStatus: http.StatusInternalServerError,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			svc := new(mocks.ArticleService)
+			svc.On("GetArticlesPagination", mock.Anything, mock.Anything).Return(tt.mockGetArticlesPagination.data, tt.mockGetArticlesPagination.err)
+
+			ctrl := NewController(svc)
+
+			e := echo.New()
+
+			validator.Init(e)
+
+			req := httptest.NewRequest(http.MethodGet, "/articles", nil)
+			rec := httptest.NewRecorder()
+
+			req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+
+			c := e.NewContext(req, rec)
+			c.SetPath("/articles")
+
+			err := ctrl.HandleGetArticlesPagination(c)
+			if err != nil {
+				//Mostly it's echo  behaviour like custom error handler and validator
+				he, ok := err.(*echo.HTTPError)
+				if ok {
+					assert.Equal(t, tt.wantStatus, he.Code)
+				} else {
+					assert.Equal(t, tt.wantErr, err != nil)
 				}
 			} else {
 				assert.Equal(t, tt.wantStatus, rec.Code)
