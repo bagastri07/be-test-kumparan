@@ -1,6 +1,7 @@
 package models
 
 import (
+	"github.com/bagastri07/be-test-kumparan/constants"
 	"github.com/bagastri07/be-test-kumparan/models/base_models"
 	"github.com/microcosm-cc/bluemonday"
 )
@@ -31,11 +32,11 @@ func (f *ArticleFilter) ProcessSanitize() {
 	if f.Page <= 0 {
 		f.Page = 1
 	}
-	if f.Limit > 50 {
-		f.Limit = 50
+	if f.Limit > constants.MaxLimit {
+		f.Limit = constants.MaxLimit
 	}
-	if f.Limit <= 0 {
-		f.Limit = 5
+	if f.Limit <= constants.MinLimit {
+		f.Limit = constants.MinLimit
 	}
 	if f.Query != "" {
 		f.Query = p.Sanitize(f.Query)

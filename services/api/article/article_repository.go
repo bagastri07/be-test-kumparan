@@ -73,7 +73,8 @@ func (repo *articleRepository) buildSelectQuery() sq.SelectBuilder {
 			repo.GetTableName() + ".deleted_at": nil,
 		}).
 		From(repo.GetTableName()).
-		Join("authors ON authors.id = " + repo.GetTableName() + ".author_id")
+		Join("authors ON authors.id = " + repo.GetTableName() + ".author_id").
+		OrderBy("created_at DESC")
 	return builder
 
 }
