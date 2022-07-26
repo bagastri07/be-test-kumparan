@@ -37,6 +37,8 @@ func (repo *authorRepository) buildInsertQuery(data *models.Author) sq.InsertBui
 }
 
 func (repo *authorRepository) InsertAuthor(ctx context.Context, tx *sqlx.Tx, data *models.Author) error {
+	segment := utils.StartTracer(ctx, "AuthorRepository", "InsertAuthor")
+	defer segment.End()
 
 	query, args, err := repo.buildInsertQuery(data).ToSql()
 	if err != nil {
@@ -52,6 +54,9 @@ func (repo *authorRepository) InsertAuthor(ctx context.Context, tx *sqlx.Tx, dat
 }
 
 func (repo *authorRepository) GetAuthorByID(ctx context.Context, db *sqlx.DB, authorID string) (*models.Author, error) {
+	segment := utils.StartTracer(ctx, "AuthorRepository", "GetAuthorByID")
+	defer segment.End()
+
 	query, args, err := sq.Select(fields...).
 		From(repo.GetTableName()).
 		Where(sq.Eq{
@@ -67,7 +72,7 @@ func (repo *authorRepository) GetAuthorByID(ctx context.Context, db *sqlx.DB, au
 
 	if err := db.GetContext(ctx, author, query, args...); err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
-			return nil, utils.ErrNotFound
+			return nil, nil
 		}
 		return nil, err
 	}

@@ -26,6 +26,9 @@ func NewService(db *sqlx.DB, artcarticleRepository ArticleRepository, authorRepo
 }
 
 func (svc *articleService) CreateArticle(ctx context.Context, payload *models.CreateArticlePayload) error {
+	segment := utils.StartTracer(ctx, "ArticleService", "CreateArticle")
+	defer segment.End()
+
 	author, err := svc.authorReposiotry.GetAuthorByID(ctx, svc.db, payload.AuthorID)
 	if err != nil {
 		return err

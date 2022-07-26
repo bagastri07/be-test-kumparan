@@ -21,5 +21,6 @@ func NewCustomErr(code int, message string) *echo.HTTPError {
 
 // general errors
 var (
-	ErrNotFound = NewCustomErr(http.StatusNotFound, "not found.")
+	ErrNotFound         = NewCustomErr(http.StatusNotFound, "not found.")
+	ErrInterServerError = NewCustomErr(http.StatusInternalServerError, "internal server error.")
 )

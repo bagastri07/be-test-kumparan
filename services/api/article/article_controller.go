@@ -2,7 +2,6 @@ package article
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 
 	"github.com/bagastri07/be-test-kumparan/models"
@@ -60,9 +59,6 @@ func (ctrl *articleController) HandleGetArticlesPagination(c echo.Context) error
 	if err := c.Validate(filter); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err)
 	}
-
-	fmt.Println(filter.Author)
-	fmt.Println(filter.Query)
 
 	result, err := ctrl.articleService.GetArticlesPagination(ctx, filter)
 	if err != nil {

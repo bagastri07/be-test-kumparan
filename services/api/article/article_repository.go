@@ -40,6 +40,9 @@ func (repo *articleRepository) buildInsertQuery(data *models.Article) sq.InsertB
 }
 
 func (repo *articleRepository) InsertArticle(ctx context.Context, tx *sqlx.Tx, data *models.Article) error {
+	segment := utils.StartTracer(ctx, "ArticleRepository", "InsertArticle")
+	defer segment.End()
+
 	query, args, err := repo.buildInsertQuery(data).ToSql()
 	if err != nil {
 		return err
@@ -91,6 +94,9 @@ func (repo *articleRepository) buildSearchQuery(selectBuilder sq.SelectBuilder, 
 }
 
 func (repo *articleRepository) GetCountArticle(ctx context.Context, db *sqlx.DB, filter *models.ArticleFilter) (uint64, error) {
+	segment := utils.StartTracer(ctx, "ArticleRepository", "GetCountArticle")
+	defer segment.End()
+
 	var (
 		count uint64
 	)
