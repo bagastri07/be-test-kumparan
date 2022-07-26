@@ -64,10 +64,10 @@ github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:4
 github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:48.24,50.4 1 0
 github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:50.9,52.4 1 1
 github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:64.76,66.3 1 1
-github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:71.142,79.16 6 0
-github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:83.2,84.16 2 0
-github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:88.2,90.35 2 0
-github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:104.2,107.19 3 0
-github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:79.16,81.3 1 0
-github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:84.16,86.3 1 0
-github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:90.35,102.3 1 0
+github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:71.142,79.16 6 1
+github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:83.2,84.16 2 1
+github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:88.2,90.35 2 1
+github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:104.2,107.19 3 1
+github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:79.16,81.3 1 1
+github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:84.16,86.3 1 1
+github.com/bagastri07/be-test-kumparan/services/api/article/article_service.go:90.35,102.3 1 1
