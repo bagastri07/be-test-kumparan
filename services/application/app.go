@@ -9,7 +9,7 @@ import (
 
 	"github.com/bagastri07/be-test-kumparan/constants"
 	"github.com/bagastri07/be-test-kumparan/database"
-	midd "github.com/bagastri07/be-test-kumparan/middleware"
+	"github.com/bagastri07/be-test-kumparan/infrastructure"
 	"github.com/bagastri07/be-test-kumparan/services/api/article"
 	"github.com/bagastri07/be-test-kumparan/services/api/author"
 	"github.com/bagastri07/be-test-kumparan/services/api/health"
@@ -18,6 +18,8 @@ import (
 	"github.com/bagastri07/be-test-kumparan/validator"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+
+	nrecho "github.com/newrelic/go-agent/v3/integrations/nrecho-v4"
 )
 
 type App struct {
@@ -37,6 +39,7 @@ func New(config *config.Config) *App {
 	app.initDatabase()
 	app.initValidator()
 	app.initRoutes()
+
 	return app
 }
 
@@ -61,15 +64,22 @@ func (app *App) initRoutes() {
 
 	article := app.E.Group("/articles")
 	article.POST("", articleController.HandleCreateArticle).Name = constants.AuthLevelPassword
+	article.GET("", articleController.HandleGetArticlesPagination).Name = constants.AuthLevelPassword
 }
 
 func (app *App) initMiddleware() {
+	newRelic, err := infrastructure.NewRelicApm(app.config)
+	if err != nil {
+		panic(err)
+	}
+
+	app.E.Use(nrecho.Middleware(newRelic))
 	app.E.Use(middleware.Recover())
 	app.E.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"*"},
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAcceptEncoding},
 	}))
-	app.E.Use(midd.Logger())
+	app.E.Use(middleware.Logger())
 }
 
 func (app *App) initDatabase() {

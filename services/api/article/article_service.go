@@ -5,27 +5,27 @@ import (
 	"database/sql"
 
 	"github.com/bagastri07/be-test-kumparan/models"
+	"github.com/bagastri07/be-test-kumparan/models/base_models"
 	"github.com/bagastri07/be-test-kumparan/services/api/author"
 	"github.com/bagastri07/be-test-kumparan/utils"
 	"github.com/jmoiron/sqlx"
 )
 
-type articleSercive struct {
+type articleService struct {
 	db                *sqlx.DB
 	articleRepository ArticleRepository
 	authorReposiotry  author.AuthorRepository
 }
 
 func NewService(db *sqlx.DB, artcarticleRepository ArticleRepository, authorRepository author.AuthorRepository) ArticleService {
-	return &articleSercive{
+	return &articleService{
 		db:                db,
 		articleRepository: artcarticleRepository,
 		authorReposiotry:  authorRepository,
 	}
 }
 
-func (svc *articleSercive) CreateArticle(ctx context.Context, payload *models.CreateArticlePayload) error {
-
+func (svc *articleService) CreateArticle(ctx context.Context, payload *models.CreateArticlePayload) error {
 	author, err := svc.authorReposiotry.GetAuthorByID(ctx, svc.db, payload.AuthorID)
 	if err != nil {
 		return err
@@ -60,4 +60,42 @@ func (svc *articleSercive) CreateArticle(ctx context.Context, payload *models.Cr
 	}
 
 	return nil
+}
+
+func (svc *articleService) GetArticlesPagination(ctx context.Context, filter *models.ArticleFilter) (*base_models.PaginationResponse, error) {
+	segment := utils.StartTracer(ctx, "ArticleService", "GetArticlesPagination")
+	defer segment.End()
+
+	filter.ProcessSanitize()
+
+	articles, err := svc.articleRepository.GetArticlesList(ctx, svc.db, filter)
+	if err != nil {
+		return nil, err
+	}
+
+	totalItems, err := svc.articleRepository.GetCountArticle(ctx, svc.db, filter)
+	if err != nil {
+		return nil, err
+	}
+
+	items := make([]models.GetArticleResponse, 0)
+
+	for _, article := range articles {
+
+		items = append(items, models.GetArticleResponse{
+			ID:         article.ID,
+			AuthorName: article.AuthorName,
+			Title:      article.Title,
+			Body:       article.Body,
+			BaseTimeStampResponse: base_models.BaseTimeStampResponse{
+				CreatedAt: article.CreatedAt,
+				UpdatedAt: article.UpdatedAt,
+			},
+		})
+	}
+
+	resp := base_models.PaginationResponse{}
+	resp.ToResponse(&filter.PaginationParams, items, totalItems)
+
+	return &resp, nil
 }
