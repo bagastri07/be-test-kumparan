@@ -14,20 +14,22 @@ type Config struct {
 	AppPort  string `envconfig:"APP_PORT"`
 	AppHost  string `envconfig:"APP_HOST"`
 
-	DBUrl          string `envconfig:"DB_URL"`
-	DBHost         string `envconfig:"DB_HOST"`
-	DBPort         string `envconfig:"DB_PORT"`
-	DBUser         string `envconfig:"DB_USER"`
-	DBPassword     string `envconfig:"DB_PASSWORD"`
-	DBName         string `envconfig:"DB_NAME"`
-	DBConnection   string `envconfig:"DB_CONNECTION"`
-	DBDialTimeout  int    `envconfig:"DB_DIAL_TIMEOUT"`
-	DBReadTimeout  int    `envconfig:"DB_READ_TIMEOUT"`
-	DBWriteTimeout int    `envconfig:"DB_WRITE_TIMEOUT"`
-	DBMaxOpenConns int    `envconfig:"DB_MAX_OPEN_CONNS"`
-	DBMaxIdleConns int    `envconfig:"DB_MAX_IDLE_CONNS"`
+	DBUrl             string `envconfig:"DB_URL"`
+	DBHost            string `envconfig:"DB_HOST"`
+	DBPort            string `envconfig:"DB_PORT"`
+	DBUser            string `envconfig:"DB_USER"`
+	DBPassword        string `envconfig:"DB_PASSWORD"`
+	DBName            string `envconfig:"DB_NAME"`
+	DBConnection      string `envconfig:"DB_CONNECTION"`
+	DBDialTimeout     int    `envconfig:"DB_DIAL_TIMEOUT"`
+	DBReadTimeout     int    `envconfig:"DB_READ_TIMEOUT"`
+	DBWriteTimeout    int    `envconfig:"DB_WRITE_TIMEOUT"`
+	DBMaxOpenConns    int    `envconfig:"DB_MAX_OPEN_CONNS"`
+	DBMaxIdleConns    int    `envconfig:"DB_MAX_IDLE_CONNS"`
+	DBMaxLifeTimeConn int    `envconfig:"DB_MAX_LIFETIME_CONN"`
 
 	NewRelic_License string `envconfig:"NEWRELIC_LICENSE"`
+	NewRelicOn       bool   `envconfig:"NEWRELIC_ON"`
 }
 
 var (

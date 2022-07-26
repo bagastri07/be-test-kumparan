@@ -5,6 +5,7 @@ import (
 
 	"github.com/bagastri07/be-test-kumparan/services/config"
 	"github.com/go-sql-driver/mysql"
+	_ "github.com/newrelic/go-agent/v3/integrations/nrmysql"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -26,9 +27,13 @@ func NewConnection(conf config.Config) (*sqlx.DB, error) {
 
 	dsn := mysqlConfig.FormatDSN()
 
-	db, err := sqlx.Connect("mysql", dsn)
-	db.SetConnMaxIdleTime(time.Duration(conf.DBMaxIdleConns) * time.Second)
-	db.SetMaxOpenConns(conf.DBMaxOpenConns)
+	db, err := sqlx.Connect("nrmysql", dsn)
+	if err != nil {
+		panic(err)
+	}
+	db.DB.SetConnMaxIdleTime(time.Duration(config.GetConfig().DBMaxIdleConns) * time.Second)
+	db.DB.SetMaxOpenConns(conf.DBMaxOpenConns)
+	db.DB.SetConnMaxLifetime(time.Duration(conf.DBMaxIdleConns) * time.Second)
 
 	return db, err
 }

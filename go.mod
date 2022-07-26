@@ -9,6 +9,7 @@ require (
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/labstack/echo/v4 v4.7.2
 	github.com/newrelic/go-agent/v3/integrations/nrecho-v4 v1.0.2
+	github.com/newrelic/go-agent/v3/integrations/nrmysql v1.2.1
 	github.com/stretchr/testify v1.8.0
 )
 
