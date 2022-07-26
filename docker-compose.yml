@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  kumparan_db:
+    image: mysql:8
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-time-zone=+07:00']
+    container_name: "kumparan-db"
+    ports:
+      - 3306:3306
+    volumes:
+      - kumparan-vol:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=kumparan
+      - MYSQL_USER=kumparan
+      - MYSQL_DATABASE=kumparan
+      - TZ=Asia/Jakarta
+    networks:
+      - kumparan-net
+
+  api_svc:
+    build: .
+    container_name: "kumparan-be-api"
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    restart: always
+    depends_on:
+      - kumparan_db
+    networks:
+      - kumparan-net
+    environment:
+      - DB_HOST=kumparan-db
+
+networks:
+  kumparan-net:
+    driver: bridge
+
+volumes:
+  kumparan-vol:
