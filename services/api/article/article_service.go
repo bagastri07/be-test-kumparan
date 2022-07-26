@@ -9,6 +9,7 @@ import (
 	"github.com/bagastri07/be-test-kumparan/services/api/author"
 	"github.com/bagastri07/be-test-kumparan/utils"
 	"github.com/jmoiron/sqlx"
+	"github.com/microcosm-cc/bluemonday"
 )
 
 type articleService struct {
@@ -51,11 +52,13 @@ func (svc *articleService) CreateArticle(ctx context.Context, payload *models.Cr
 		}
 	}()
 
+	p := bluemonday.UGCPolicy()
+
 	data := models.Article{
 		ID:       utils.GenerateUUID(),
 		AuthorID: payload.AuthorID,
-		Title:    payload.Title,
-		Body:     payload.Body,
+		Title:    p.Sanitize(payload.Title),
+		Body:     p.Sanitize(payload.Body),
 	}
 
 	if err := svc.articleRepository.InsertArticle(ctx, tx, &data); err != nil {

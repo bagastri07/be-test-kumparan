@@ -7,6 +7,7 @@ import (
 	"github.com/bagastri07/be-test-kumparan/models"
 	"github.com/bagastri07/be-test-kumparan/utils"
 	"github.com/jmoiron/sqlx"
+	"github.com/microcosm-cc/bluemonday"
 )
 
 type authorService struct {
@@ -35,9 +36,11 @@ func (svc *authorService) CreateAuthor(ctx context.Context, payload *models.Crea
 		}
 	}()
 
+	p := bluemonday.UGCPolicy()
+
 	data := models.Author{
 		ID:   utils.GenerateUUID(),
-		Name: payload.Name,
+		Name: p.Sanitize(payload.Name),
 	}
 
 	if err := svc.authorRepository.InsertAuthor(ctx, tx, &data); err != nil {
