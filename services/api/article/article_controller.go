@@ -1,7 +1,6 @@
 package article
 
 import (
-	"context"
 	"net/http"
 
 	"github.com/bagastri07/be-test-kumparan/models"
@@ -23,6 +22,8 @@ func (ctrl *articleController) HandleCreateArticle(c echo.Context) error {
 	segments := utils.StartControllerTracer(c, "ArticleController", "HandleCreateArticle")
 	defer segments.End()
 
+	ctx := c.Request().Context()
+
 	payload := new(models.CreateArticlePayload)
 
 	if err := c.Bind(payload); err != nil {
@@ -33,7 +34,7 @@ func (ctrl *articleController) HandleCreateArticle(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err)
 	}
 
-	if err := ctrl.articleService.CreateArticle(context.Background(), payload); err != nil {
+	if err := ctrl.articleService.CreateArticle(ctx, payload); err != nil {
 		return err
 	}
 
