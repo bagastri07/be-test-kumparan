@@ -73,6 +73,7 @@ func (svc *articleService) GetArticlesPagination(ctx context.Context, filter *mo
 	defer segment.End()
 
 	filter.ProcessSanitize()
+	filter.ProcessLimitation()
 
 	articles, err := svc.articleRepository.GetArticlesList(ctx, svc.db, filter)
 	if err != nil {

@@ -2,11 +2,25 @@ package base_models
 
 import (
 	"math"
+
+	"github.com/bagastri07/be-test-kumparan/constants"
 )
 
 type PaginationParams struct {
 	Page  uint64 `query:"page"`
 	Limit uint64 `query:"limit"`
+}
+
+func (p *PaginationParams) ProcessLimitation() {
+	if p.Page <= 0 {
+		p.Page = 1
+	}
+	if p.Limit > constants.MaxLimit {
+		p.Limit = constants.MaxLimit
+	}
+	if p.Limit <= constants.MinLimit {
+		p.Limit = constants.MinLimit
+	}
 }
 
 type PaginationResponse struct {

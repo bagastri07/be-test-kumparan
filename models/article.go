@@ -1,7 +1,6 @@
 package models
 
 import (
-	"github.com/bagastri07/be-test-kumparan/constants"
 	"github.com/bagastri07/be-test-kumparan/models/base_models"
 	"github.com/microcosm-cc/bluemonday"
 )
@@ -29,15 +28,7 @@ type ArticleFilter struct {
 
 func (f *ArticleFilter) ProcessSanitize() {
 	p := bluemonday.UGCPolicy()
-	if f.Page <= 0 {
-		f.Page = 1
-	}
-	if f.Limit > constants.MaxLimit {
-		f.Limit = constants.MaxLimit
-	}
-	if f.Limit <= constants.MinLimit {
-		f.Limit = constants.MinLimit
-	}
+
 	if f.Query != "" {
 		f.Query = p.Sanitize(f.Query)
 	}
