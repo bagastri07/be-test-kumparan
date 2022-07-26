@@ -11,3 +11,7 @@ type ArticleRepository interface {
 	GetTableName() string
 	InsertArticle(ctx context.Context, tx *sqlx.Tx, data *models.Article) error
 }
+
+type ArticleService interface {
+	CreateArticle(ctx context.Context, payload *models.CreateArticlePayload) error
+}

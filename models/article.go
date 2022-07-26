@@ -9,3 +9,9 @@ type Article struct {
 	Body     string `db:"body"`
 	base_models.BaseTimestamp
 }
+
+type CreateArticlePayload struct {
+	AuthorID string `json:"authorIdv" validate:"required"`
+	Title    string `json:"title" validate:"required"`
+	Body     string `json:"body" validate:"required"`
+}
