@@ -2,6 +2,7 @@ package article
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/bagastri07/be-test-kumparan/models"
@@ -30,6 +31,7 @@ func (ctrl *articleController) HandleCreateArticle(c echo.Context) error {
 	}
 
 	if err := ctrl.articleService.CreateArticle(context.Background(), payload); err != nil {
+		fmt.Println(err)
 		return err
 	}
 

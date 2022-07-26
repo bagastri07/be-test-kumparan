@@ -3,7 +3,6 @@ package article
 import (
 	"context"
 	"database/sql"
-	"net/http"
 
 	"github.com/bagastri07/be-test-kumparan/models"
 	"github.com/bagastri07/be-test-kumparan/services/api/author"
@@ -33,10 +32,7 @@ func (svc *articleSercive) CreateArticle(ctx context.Context, payload *models.Cr
 	}
 
 	if author == nil {
-		return &utils.CustomError{
-			Code:    http.StatusNotFound,
-			Message: "author not found.",
-		}
+		return utils.ErrNotFound
 	}
 
 	tx, err := svc.db.BeginTxx(ctx, &sql.TxOptions{Isolation: sql.LevelRepeatableRead})

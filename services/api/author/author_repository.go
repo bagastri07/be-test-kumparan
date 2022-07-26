@@ -2,9 +2,12 @@ package author
 
 import (
 	"context"
+	"database/sql"
+	"errors"
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/bagastri07/be-test-kumparan/models"
+	"github.com/bagastri07/be-test-kumparan/utils"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -52,7 +55,7 @@ func (repo *authorRepository) GetAuthorByID(ctx context.Context, db *sqlx.DB, au
 	query, args, err := sq.Select(fields...).
 		From(repo.GetTableName()).
 		Where(sq.Eq{
-			"author_id":  authorID,
+			"id":         authorID,
 			"deleted_at": nil,
 		}).
 		ToSql()
@@ -60,11 +63,14 @@ func (repo *authorRepository) GetAuthorByID(ctx context.Context, db *sqlx.DB, au
 		return nil, err
 	}
 
-	author := models.Author{}
+	author := new(models.Author)
 
-	if err := db.SelectContext(ctx, &author, query, args...); err != nil {
+	if err := db.GetContext(ctx, author, query, args...); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, utils.ErrNotFound
+		}
 		return nil, err
 	}
 
-	return &author, nil
+	return author, nil
 }

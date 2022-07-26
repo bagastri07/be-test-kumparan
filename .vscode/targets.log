@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Jul 26 18:38:21 2022
+# Make data base, printed on Tue Jul 26 21:01:00 2022
 
 # Variables
 
@@ -18,8 +18,6 @@ GO111MODULE = on
 GDK_BACKEND = x11
 # environment
 LC_ALL = C
-# environment
-NO_AT_BRIDGE = 1
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
@@ -111,7 +109,7 @@ SNAP_REEXEC =
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 4551
+VSCODE_PID = 211948
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -149,7 +147,7 @@ MAKE = $(MAKE_COMMAND)
 # environment
 SNAP_COOKIE = nLKuAMqlPoax-QqPEovZUn9E45S3SmqF57mPMow08qQVx25dlWlD
 # environment
-PATH = /home/bagas/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/go/bin:/usr/local/buf/bin:/home/bagas/go/bin
+PATH = /home/bagas/.local/bin:/opt/lampp/bin:/home/bagas/.nvm/versions/node/v16.13.1/bin:/home/bagas/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/go/bin:/usr/local/buf/bin:/home/bagas/go/bin:/usr/local/go/bin:/usr/local/buf/bin:/home/bagas/go/bin
 # default
 MAKEFILES := 
 # environment
@@ -193,7 +191,7 @@ GNUMAKEFLAGS :=
 # environment
 LOGNAME = bagas
 # environment
-GIO_LAUNCHED_DESKTOP_FILE = /home/bagas/.config/autostart/plank.desktop
+GIO_LAUNCHED_DESKTOP_FILE = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
 SNAP_ARCH = amd64
 # makefile
@@ -221,7 +219,7 @@ MANAGERPID = 1981
 # environment
 LC_MEASUREMENT = id_ID.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 187318
+GIO_LAUNCHED_DESKTOP_FILE_PID = 211903
 # environment
 _ = /snap/code/102/usr/share/code/code
 # environment
@@ -279,14 +277,14 @@ SNAP_USER_DATA = /home/bagas/snap/code/102
 # environment
 XDG_MENU_PREFIX = gnome-
 # environment
- 
 GDMSESSION = ubuntu
 # environment
+ 
 LC_IDENTIFICATION = id_ID.UTF-8
 # environment
 SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
 # variable set hash-table stats:
-# Load=136/1024=13%, Rehash=0, Collisions=8/166=5%
+# Load=135/1024=13%, Rehash=0, Collisions=8/165=5%
 
 # Pattern-specific Variable Values
 
@@ -294,9 +292,9 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Directories
 
-# . (device 66313, inode 432713): 20 files, no impossibilities.
+# . (device 66313, inode 432713): 22 files, no impossibilities.
 
-# 20 files, no impossibilities in 1 directories.
+# 22 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -360,12 +358,12 @@ run:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 29 / storage = 244 B / avg = 8 B
-# current buf: size = 8162 B / used = 244 B / count = 29 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 31 / storage = 258 B / avg = 8 B
+# current buf: size = 8162 B / used = 258 B / count = 31 / avg = 8 B
 
-# strcache performance: lookups = 37 / hit rate = 21%
+# strcache performance: lookups = 39 / hit rate = 20%
 # hash-table stats:
-# Load=29/8192=0%, Rehash=0, Collisions=0/37=0%
-# Finished Make data base on Tue Jul 26 18:38:22 2022
+# Load=31/8192=0%, Rehash=0, Collisions=0/39=0%
+# Finished Make data base on Tue Jul 26 21:01:01 2022
 
  
