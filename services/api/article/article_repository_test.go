@@ -86,3 +86,98 @@ func Test_articleRepository_InsertArticle(t *testing.T) {
 		})
 	}
 }
+
+func Test_articleRepository_GetCountArticle(t *testing.T) {
+	type args struct {
+		ctx    context.Context
+		filter *models.ArticleFilter
+	}
+
+	type mockCount struct {
+		count uint64
+		err   error
+	}
+
+	tests := []struct {
+		name      string
+		args      args
+		mockCount mockCount
+		want      uint64
+		wantErr   error
+	}{
+		{
+			name: "when success, then return count",
+			args: args{
+				ctx:    context.TODO(),
+				filter: &models.ArticleFilter{},
+			},
+			mockCount: mockCount{
+				count: 34,
+				err:   nil,
+			},
+			want:    34,
+			wantErr: nil,
+		},
+		{
+			name: "when err, then return err",
+			args: args{
+				ctx:    context.TODO(),
+				filter: &models.ArticleFilter{},
+			},
+			mockCount: mockCount{
+				count: 0,
+				err:   sql.ErrConnDone,
+			},
+			want:    0,
+			wantErr: sql.ErrConnDone,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			repo := NewRepository()
+
+			db, mock, err := sqlmock.New(sqlmock.QueryMatcherOption(sqlmock.QueryMatcherEqual))
+			if err != nil {
+				t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
+			}
+			defer db.Close()
+			sqlxDB := sqlx.NewDb(db, "sqlmock")
+
+			mockExpectGet := mock.ExpectQuery(
+				`SELECT count(*) 
+				FROM
+					(SELECT
+						articles.id,
+						articles.author_id,
+						articles.title,
+						articles.body,
+						articles.created_at,
+						articles.updated_at,
+						articles.deleted_at,
+						authors.name AS author_name
+					FROM
+						articles
+					JOIN
+						authors ON authors.id = articles.author_id
+					WHERE
+						articles.deleted_at IS NULL
+					ORDER BY created_at DESC) AS c`,
+			)
+
+			if tt.mockCount.err != nil {
+				mockExpectGet.WillReturnError(tt.mockCount.err)
+			} else {
+				row := sqlmock.NewRows([]string{
+					"count(*)",
+				})
+
+				row.AddRow(tt.mockCount.count)
+				mockExpectGet.WillReturnRows(row)
+			}
+
+			data, err := repo.GetCountArticle(tt.args.ctx, sqlxDB, tt.args.filter)
+			assert.Equal(t, tt.want, data)
+			assert.Equal(t, tt.wantErr, err)
+		})
+	}
+}
