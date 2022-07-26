@@ -7,8 +7,8 @@ import (
 
 func NewRelicApm(conf *config.Config) (*newrelic.Application, error) {
 	app, err := newrelic.NewApplication(
-		newrelic.ConfigAppName("kumparan-backend-test"),
-		newrelic.ConfigLicense("595b7efbadaa629bc399ac71f6355ceacd4bNRAL"),
+		newrelic.ConfigAppName(conf.AppName),
+		newrelic.ConfigLicense(conf.NewRelic_License),
 		newrelic.ConfigAppLogForwardingEnabled(true),
 	)
 

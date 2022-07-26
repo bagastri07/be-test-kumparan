@@ -26,6 +26,8 @@ type Config struct {
 	DBWriteTimeout int    `envconfig:"DB_WRITE_TIMEOUT"`
 	DBMaxOpenConns int    `envconfig:"DB_MAX_OPEN_CONNS"`
 	DBMaxIdleConns int    `envconfig:"DB_MAX_IDLE_CONNS"`
+
+	NewRelic_License string `envconfig:"NEWRELIC_LICENSE"`
 }
 
 var (
