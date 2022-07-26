@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jul 25 23:18:06 2022
+# Make data base, printed on Tue Jul 26 08:55:15 2022
 
 # Variables
 
@@ -109,7 +111,7 @@ SNAP_REEXEC =
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 172442
+VSCODE_PID = 255095
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -221,7 +223,7 @@ MANAGERPID = 1906
 # environment
 LC_MEASUREMENT = id_ID.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 172397
+GIO_LAUNCHED_DESKTOP_FILE_PID = 255039
 # environment
 _ = /snap/code/102/usr/share/code/code
 # environment
@@ -278,8 +280,6 @@ SNAP_COMMON = /var/snap/code/common
 SNAP_USER_DATA = /home/bagas/snap/code/102
 # environment
  
-make: *** No rule to make target 'all'.  Stop.
-
 XDG_MENU_PREFIX = gnome-
 # environment
 GDMSESSION = ubuntu
@@ -296,9 +296,9 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Directories
 
-# . (device 66313, inode 432713): 18 files, no impossibilities.
+# . (device 66313, inode 432713): 20 files, no impossibilities.
 
-# 18 files, no impossibilities in 1 directories.
+# 20 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -362,13 +362,12 @@ run:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 27 / storage = 227 B / avg = 8 B
-# current buf: size = 8162 B / used = 227 B / count = 27 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 29 / storage = 244 B / avg = 8 B
+# current buf: size = 8162 B / used = 244 B / count = 29 / avg = 8 B
 
-# strcache performance: lookups = 35 / hit rate = 22%
+# strcache performance: lookups = 37 / hit rate = 21%
 # hash-table stats:
- 
-# Load=27/8192=0%, Rehash=0, Collisions=0/35=0%
-# Finished Make data base on Mon Jul 25 23:18:06 2022
+# Load=29/8192=0%, Rehash=0, Collisions=0/37=0%
+# Finished Make data base on Tue Jul 26 08:55:15 2022
 
  
