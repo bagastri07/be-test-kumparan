@@ -10,6 +10,7 @@ import (
 type AuthorRepository interface {
 	GetTableName() string
 	InsertAuthor(ctx context.Context, tx *sqlx.Tx, data *models.Author) error
+	GetAuthorByID(ctx context.Context, db *sqlx.DB, authorID string) (*models.Author, error)
 }
 
 type AuthorService interface {

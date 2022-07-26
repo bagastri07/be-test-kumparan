@@ -14,6 +14,12 @@ func NewRepository() AuthorRepository {
 	return &authorRepository{}
 }
 
+var (
+	fields = []string{
+		"id",
+	}
+)
+
 func (repo *authorRepository) GetTableName() string {
 	return "authors"
 }
@@ -40,4 +46,25 @@ func (repo *authorRepository) InsertAuthor(ctx context.Context, tx *sqlx.Tx, dat
 	}
 
 	return nil
+}
+
+func (repo *authorRepository) GetAuthorByID(ctx context.Context, db *sqlx.DB, authorID string) (*models.Author, error) {
+	query, args, err := sq.Select(fields...).
+		From(repo.GetTableName()).
+		Where(sq.Eq{
+			"author_id":  authorID,
+			"deleted_at": nil,
+		}).
+		ToSql()
+	if err != nil {
+		return nil, err
+	}
+
+	author := models.Author{}
+
+	if err := db.SelectContext(ctx, &author, query, args...); err != nil {
+		return nil, err
+	}
+
+	return &author, nil
 }

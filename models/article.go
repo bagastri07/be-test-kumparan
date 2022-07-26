@@ -11,7 +11,7 @@ type Article struct {
 }
 
 type CreateArticlePayload struct {
-	AuthorID string `json:"authorIdv" validate:"required"`
+	AuthorID string `json:"authorId" validate:"required"`
 	Title    string `json:"title" validate:"required"`
 	Body     string `json:"body" validate:"required"`
 }

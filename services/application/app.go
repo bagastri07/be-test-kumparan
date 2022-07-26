@@ -10,6 +10,7 @@ import (
 	"github.com/bagastri07/be-test-kumparan/constants"
 	"github.com/bagastri07/be-test-kumparan/database"
 	midd "github.com/bagastri07/be-test-kumparan/middleware"
+	"github.com/bagastri07/be-test-kumparan/services/api/article"
 	"github.com/bagastri07/be-test-kumparan/services/api/author"
 	"github.com/bagastri07/be-test-kumparan/services/api/health"
 	"github.com/bagastri07/be-test-kumparan/services/config"
@@ -42,18 +43,24 @@ func New(config *config.Config) *App {
 func (app *App) initRoutes() {
 	//init repositories
 	authorRepository := author.NewRepository()
+	articleRepository := article.NewRepository()
 
 	// init services
 	authorService := author.NewService(app.DNmanager.DB, authorRepository)
+	articleService := article.NewService(app.DNmanager.DB, articleRepository, authorRepository)
 
 	// init controler
 	healthController := health.NewController(app.E)
 	authorController := author.NewController(authorService)
+	articleController := article.NewController(articleService)
 
 	app.E.GET("/", healthController.Root).Name = constants.AuthLevelPublic
 
 	author := app.E.Group("/authors")
 	author.POST("", authorController.HandleCreateAuthor).Name = constants.AuthLevelPassword
+
+	article := app.E.Group("/articles")
+	article.POST("", articleController.HandleCreateArticle).Name = constants.AuthLevelPassword
 }
 
 func (app *App) initMiddleware() {
