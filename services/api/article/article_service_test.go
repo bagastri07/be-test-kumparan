@@ -143,7 +143,7 @@ func Test_articleService_CreateArticle(t *testing.T) {
 			svc := &articleService{
 				db:                sqlxDB,
 				articleRepository: articleRepository,
-				authorReposiotry:  authorRepository,
+				authorRepository:  authorRepository,
 			}
 
 			err = svc.CreateArticle(tt.args.ctx, tt.args.payload)

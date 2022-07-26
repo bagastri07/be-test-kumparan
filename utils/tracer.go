@@ -15,8 +15,8 @@ func StartTracer(ctx context.Context, tag, trackerName string) *newrelic.Segment
 	return segment
 }
 
-func StartControllerTracer(eCtx echo.Context, tag, trackerName string) *newrelic.Segment {
-	txn := nrecho.FromContext(eCtx)
+func StartControllerTracer(c echo.Context, tag, trackerName string) *newrelic.Segment {
+	txn := nrecho.FromContext(c)
 	segment := newrelic.StartSegment(txn, fmt.Sprintf("%s %s", tag, trackerName))
 	return segment
 }

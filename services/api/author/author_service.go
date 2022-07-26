@@ -23,6 +23,9 @@ func NewService(db *sqlx.DB, authorRepository AuthorRepository) AuthorService {
 }
 
 func (svc *authorService) CreateAuthor(ctx context.Context, payload *models.CreateAuthorPayload) error {
+	segment := utils.StartTracer(ctx, "AuthorService", "CreateAuthor")
+	defer segment.End()
+
 	tx, err := svc.db.BeginTxx(ctx, &sql.TxOptions{Isolation: sql.LevelRepeatableRead})
 
 	defer func() {

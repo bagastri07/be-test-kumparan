@@ -1,10 +1,10 @@
 package author
 
 import (
-	"context"
 	"net/http"
 
 	"github.com/bagastri07/be-test-kumparan/models"
+	"github.com/bagastri07/be-test-kumparan/utils"
 	"github.com/labstack/echo/v4"
 )
 
@@ -19,6 +19,11 @@ func NewController(authorService AuthorService) *authorController {
 }
 
 func (ctrl *authorController) HandleCreateAuthor(c echo.Context) error {
+	segments := utils.StartControllerTracer(c, "AuthorController", "HandleCreateAuthor")
+	defer segments.End()
+
+	ctx := c.Request().Context()
+
 	payload := new(models.CreateAuthorPayload)
 
 	if err := c.Bind(payload); err != nil {
@@ -29,7 +34,7 @@ func (ctrl *authorController) HandleCreateAuthor(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err)
 	}
 
-	if err := ctrl.authorService.CreateAuthor(context.Background(), payload); err != nil {
+	if err := ctrl.authorService.CreateAuthor(ctx, payload); err != nil {
 		return err
 	}
 

@@ -15,14 +15,14 @@ import (
 type articleService struct {
 	db                *sqlx.DB
 	articleRepository ArticleRepository
-	authorReposiotry  author.AuthorRepository
+	authorRepository  author.AuthorRepository
 }
 
 func NewService(db *sqlx.DB, artcarticleRepository ArticleRepository, authorRepository author.AuthorRepository) ArticleService {
 	return &articleService{
 		db:                db,
 		articleRepository: artcarticleRepository,
-		authorReposiotry:  authorRepository,
+		authorRepository:  authorRepository,
 	}
 }
 
@@ -30,7 +30,7 @@ func (svc *articleService) CreateArticle(ctx context.Context, payload *models.Cr
 	segment := utils.StartTracer(ctx, "ArticleService", "CreateArticle")
 	defer segment.End()
 
-	author, err := svc.authorReposiotry.GetAuthorByID(ctx, svc.db, payload.AuthorID)
+	author, err := svc.authorRepository.GetAuthorByID(ctx, svc.db, payload.AuthorID)
 	if err != nil {
 		return err
 	}
