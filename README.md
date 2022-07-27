@@ -27,7 +27,7 @@
 
 ## Live API Demo
 
-Saya melakukan deployment terhadap service ini dan bisa diakses melalui `https://cloud.krobot.my.id/kumparan-api/{ENDPOINT}`
+Live API ada di `https://kumparan.bagas3.my.id/`
 
 ## Documentation
 [Documentation](https://documenter.getpostman.com/view/10876762/UzXNTHEX)
