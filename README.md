@@ -47,7 +47,7 @@ Untuk memonitor performa dari service yang dibangun saya menggunakan APM New Rel
 
 1. What if there are thousands of articles in the database?
     
-    untuk mengatasi hal ini terdapat beberapa solusi, yang pertama adalah dengan Mmnggunakan Pagination, agar data yang ditampilkan lebih dibatasi, sehingga kerja dari service akan lebih ringan karena tidak harus menampilkan ribuan data sekaligus. Kemudian kita dapat pula membatasi hasil dengan menggunakan filter range waktu.
+    untuk mengatasi hal ini terdapat beberapa solusi, yang pertama dengan mengoptimalkan query dan melakukan indexing. Lalu dapat pula dengan menggunakan Pagination, agar data yang ditampilkan lebih dibatasi, sehingga kerja dari service akan lebih ringan karena tidak harus menampilkan ribuan data sekaligus. Kemudian kita dapat pula membatasi hasil dengan menggunakan filter range waktu.
 
     Jika solusi diatas  dirasa belum cukup, maka kita dapat melakukan horizontal scaling ataupun vertical scaling.
 
