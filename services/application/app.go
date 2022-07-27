@@ -10,6 +10,7 @@ import (
 	"github.com/bagastri07/be-test-kumparan/constants"
 	"github.com/bagastri07/be-test-kumparan/database"
 	"github.com/bagastri07/be-test-kumparan/infrastructure"
+	midd "github.com/bagastri07/be-test-kumparan/middleware"
 	"github.com/bagastri07/be-test-kumparan/services/api/article"
 	"github.com/bagastri07/be-test-kumparan/services/api/author"
 	"github.com/bagastri07/be-test-kumparan/services/api/health"
@@ -60,11 +61,11 @@ func (app *App) initRoutes() {
 	app.E.GET("/", healthController.Root).Name = constants.AuthLevelPublic
 
 	author := app.E.Group("/authors")
-	author.POST("", authorController.HandleCreateAuthor).Name = constants.AuthLevelPassword
+	author.POST("", authorController.HandleCreateAuthor, midd.VerifyKey()).Name = constants.AuthLevelPassword
 
 	article := app.E.Group("/articles")
-	article.POST("", articleController.HandleCreateArticle).Name = constants.AuthLevelPassword
-	article.GET("", articleController.HandleGetArticlesPagination).Name = constants.AuthLevelPassword
+	article.POST("", articleController.HandleCreateArticle, midd.VerifyKey()).Name = constants.AuthLevelPassword
+	article.GET("", articleController.HandleGetArticlesPagination, midd.VerifyKey()).Name = constants.AuthLevelPassword
 }
 
 func (app *App) initMiddleware() {

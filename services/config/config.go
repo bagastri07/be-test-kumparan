@@ -28,8 +28,10 @@ type Config struct {
 	DBMaxIdleConns    int    `envconfig:"DB_MAX_IDLE_CONNS"`
 	DBMaxLifeTimeConn int    `envconfig:"DB_MAX_LIFETIME_CONN"`
 
-	NewRelic_License string `envconfig:"NEWRELIC_LICENSE"`
-	NewRelicOn       bool   `envconfig:"NEWRELIC_ON"`
+	NewRelicLicense string `envconfig:"NEWRELIC_LICENSE"`
+	NewRelicOn      bool   `envconfig:"NEWRELIC_ON"`
+
+	ApiKey string `envconfig:"API_KEY"`
 }
 
 var (

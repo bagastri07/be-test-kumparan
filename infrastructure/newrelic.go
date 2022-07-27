@@ -18,7 +18,7 @@ func NewRelicApm(conf *config.Config) (*newrelic.Application, error) {
 
 	app, err := newrelic.NewApplication(
 		newrelic.ConfigAppName(conf.AppName),
-		newrelic.ConfigLicense(conf.NewRelic_License),
+		newrelic.ConfigLicense(conf.NewRelicLicense),
 		newrelic.ConfigAppLogForwardingEnabled(true),
 	)
 
