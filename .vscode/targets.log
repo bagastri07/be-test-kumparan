@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jul 27 09:04:52 2022
+# Make data base, printed on Wed Jul 27 11:55:59 2022
 
 # Variables
 
@@ -109,7 +109,7 @@ SNAP_REEXEC =
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 7322
+VSCODE_PID = 7325
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -117,7 +117,7 @@ XDG_SESSION_TYPE = x11
 # environment
 BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
-SESSION_MANAGER = local/Bagas:@/tmp/.ICE-unix/3634,unix/Bagas:/tmp/.ICE-unix/3634
+SESSION_MANAGER = local/Bagas:@/tmp/.ICE-unix/3354,unix/Bagas:/tmp/.ICE-unix/3354
 # automatic
 *F = $(notdir $*)
 # environment
@@ -161,7 +161,7 @@ LC_TIME = id_ID.UTF-8
 # environment
 SNAP = /snap/code/102
 # environment
-INVOCATION_ID = 0c1d343a779f47edbb74dae5afa3a10e
+INVOCATION_ID = 5a8e1a07f3d14407b42826a1459f6944
 # environment
 SNAP_REVISION = 102
 # environment
@@ -197,7 +197,7 @@ SNAP_ARCH = amd64
 # makefile
 .DEFAULT_GOAL := run
 # environment
-SYSTEMD_EXEC_PID = 3634
+SYSTEMD_EXEC_PID = 3354
 # environment
 DISPLAY = :1
 # environment
@@ -215,11 +215,11 @@ SNAP_DATA = /var/snap/code/102
 # environment
 SNAP_CONTEXT = nLKuAMqlPoax-QqPEovZUn9E45S3SmqF57mPMow08qQVx25dlWlD
 # environment
-MANAGERPID = 3393
+MANAGERPID = 3108
 # environment
 LC_MEASUREMENT = id_ID.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 7264
+GIO_LAUNCHED_DESKTOP_FILE_PID = 7223
 # environment
 _ = /snap/code/102/usr/share/code/code
 # environment
@@ -233,7 +233,7 @@ GDK_PIXBUF_MODULE_FILE = /home/bagas/snap/code/common/.cache/gdk-pixbuf-loaders.
 # environment
 NVM_CD_FLAGS = 
 # environment
-JOURNAL_STREAM = 8:38798
+JOURNAL_STREAM = 8:36681
 # environment
 GOMODCACHE = /home/bagas/go/pkg/mod
 # environment
@@ -385,6 +385,6 @@ test:
 # strcache performance: lookups = 50 / hit rate = 22%
 # hash-table stats:
 # Load=39/8192=0%, Rehash=0, Collisions=0/50=0%
-# Finished Make data base on Wed Jul 27 09:04:52 2022
+# Finished Make data base on Wed Jul 27 11:55:59 2022
 
  
