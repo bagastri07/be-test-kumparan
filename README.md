@@ -12,7 +12,7 @@
 - Sqlx with mysql driver
 - Squirrel for query builder
 - Golang Playground Validator v10 
-- uber Zap for logger
+- uber zerolog for logger
 - New Relic for APM
 - Mockery for mock generator
 - Docker and docker compose for deployment
